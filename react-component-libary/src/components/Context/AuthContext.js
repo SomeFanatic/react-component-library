@@ -1,7 +1,8 @@
 
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react';
 import { auth } from './../firebase';
 import { PropTypes } from 'prop-types';
+import firebase from 'firebase/app';
 
 const AuthContext = React.createContext();
 
@@ -31,9 +32,45 @@ export function AuthProvider({ children }) {
   function updatePassword(password) {
     return currentUser.updatePassword(password);
   }
-  function loginWithPopup(provider) {
-    return auth.signInWithPopup(provider);
+
+   // -------------------------------TEST--------------------------------------------
+  function alternativeLogins(authWith, signInMethod) {
+    let provider;
+    // default is google
+    switch (authWith) {
+      case "google":
+        provider = new firebase.auth.GoogleAuthProvider();
+        break;   
+      case "facebook":
+        provider = new firebase.auth.FacebookAuthProvider();
+        break;
+      case "twitter":
+        provider = new firebase.auth.TwitterAuthProvider();
+        break;
+      case "github":
+        provider = new firebase.auth.GithubAuthProvider();
+        break;
+      case "apple":
+        provider = new firebase.auth.OAuthProvider('apple.com');
+        break;
+      case "yahoo":
+        provider = new firebase.auth.OAuthProvider('yahoo.com');
+        break;
+      case "microsoft":
+        provider = new firebase.auth.OAuthProvider('microsoft.com');
+        break;       
+      default:
+        provider = new firebase.auth.GoogleAuthProvider();
+        break; 
+    }
+        // default mehtod is redirect
+    signInMethod === "popup" ? 
+    firebase.auth().signInWithPopup(provider)
+    :
+    firebase.auth().signInWithRedirect(provider);
   }
+
+
   // firebase funkcia ktorá trigeruje iné funkcie pri zmene user state
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -43,7 +80,7 @@ export function AuthProvider({ children }) {
     return unsubscribe
   }, []);
   
-  const value = { currentUser, signup, login, logout, resetPassword, updateEmail, updatePassword, loginWithPopup };
+  const value = { currentUser, signup, login, logout, resetPassword, updateEmail, updatePassword, alternativeLogins };
 
   return (
     <AuthContext.Provider value={value}>
