@@ -1,8 +1,8 @@
 import React ,{ useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Link, BrowserRouter as Router, useHistory } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext';
-import ErrorAlert from '../Widgets/ErrorAlert';
+import { useAuth } from '../Context/AuthContext';
+import ErrorAlert from '../Alert/ErrorAlert';
 
 const UpdateProfilePage = () => {
   const loginEmailRef = useRef();

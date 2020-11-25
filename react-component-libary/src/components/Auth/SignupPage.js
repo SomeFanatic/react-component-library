@@ -1,9 +1,9 @@
 import React ,{ useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Link, BrowserRouter as Router, useHistory } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import ErrorAlert from '../Widgets/ErrorAlert';
-import AlternativeLogins from '../Widgets/AlternativeLogins';
+import { useAuth } from '../Context/AuthContext';
+import ErrorAlert from '../Alert/ErrorAlert';
+import AlternativeLogins from './AlternativeLogins';
 
 const SignupPage = () => {
   const loginEmailRef = useRef();

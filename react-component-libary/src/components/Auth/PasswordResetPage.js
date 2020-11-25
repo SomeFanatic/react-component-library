@@ -1,9 +1,9 @@
 import React ,{ useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Link, BrowserRouter as Router } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext';
-import ErrorAlert from '../Widgets/ErrorAlert';
-import MessageAlert from '../Widgets/MessageAlert';
+import { useAuth } from '../Context/AuthContext';
+import ErrorAlert from '../Alert/ErrorAlert';
+import MessageAlert from '../Alert/MessageAlert';
 
 const PasswordResetPage = () => {
   const loginEmailRef = useRef();

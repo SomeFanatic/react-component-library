@@ -1,9 +1,10 @@
 import React ,{ useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Link, BrowserRouter as Router, useHistory } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext';
-import ErrorAlert from '../Widgets/ErrorAlert';
-import AlternativeLogins from '../Widgets/AlternativeLogins';
+import { useAuth } from '../Context/AuthContext';
+import ErrorAlert from '../Alert/ErrorAlert';
+import AlternativeLogins from './AlternativeLogins';
+
 
 const LoginPage = () => {
   const loginEmailRef = useRef();
@@ -38,6 +39,18 @@ const LoginPage = () => {
     }
     setLoading(false);
   }
+  const { alternativeLogins } = useAuth();
+// trigger function:
+  const onAlternativeLoginClicked = async (authWith, signInMethod) => {
+    await alternativeLogins(authWith, signInMethod);
+    history.push('/');
+  }
+
+
+
+
+
+
   return (
     <Router>
       <Container>
@@ -55,7 +68,7 @@ const LoginPage = () => {
               <TitleWrapper>
                 <AltLoginTitle>Prihláste sa pomocou:</AltLoginTitle>
               </TitleWrapper>
-                <AlternativeLogins />
+                <AlternativeLogins onAlternativeLoginClicked={onAlternativeLoginClicked} />
               <RowContainer>
                 <Link to='/signup'><h4>Registrácia</h4></Link>
                 <Link to='/passwordreset'><h4>Zabudnuté heslo</h4></Link>

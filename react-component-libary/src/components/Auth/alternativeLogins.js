@@ -1,17 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
-import { useAuth } from './../../contexts/AuthContext';
 
-
-export default function AlternativeLogins() {
-  const { alternativeLogins } = useAuth();
-// trigger function:
-const history = useHistory();
-const onAlternativeLoginClicked = async (authWith, signInMethod) => {
-  await alternativeLogins(authWith, signInMethod);
-  history.push('/');
-}
+export default function AlternativeLogins(onAlternativeLoginClicked) {
+/*   const { alternativeLogins } = useAuth();
+  // trigger function:
+  const history = useHistory();
+  const onAlternativeLoginClicked = async (authWith, signInMethod) => {
+    await alternativeLogins(authWith, signInMethod);
+    history.push('/');
+} */
     return (
       <>
          <div style={{display: "flex", flexDirection: "row"}}>
